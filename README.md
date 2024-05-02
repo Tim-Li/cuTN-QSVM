@@ -20,7 +20,7 @@ Technical Highlights:
 
 <div style="text-align:center">
     <img src="figures/speedup_cutensornet.png" alt="Speedup-Result" width="45%" height="auto">
-    <img src="figures/multi_gpu_resource.png" alt="Multi-GPU-Resource" width="45%" height="auto">
+    <img src="figures/multi_gpu_resource.png" alt="Multi-GPU-Resource" width="46%" height="auto">
 </div>
 
 

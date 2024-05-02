@@ -1,4 +1,4 @@
-## cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine with cuQuantum SDK
+## cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine
 
 ### Todo
 1. build up qsvm simulation code by cuTensorNet

@@ -10,14 +10,17 @@ src="https://developer.nvidia.com/sites/default/files/akamai/nvidia-cuquantum-ic
 Welcome to the official repository of cuTN-QSVM, featuring fast GPU simulators for benchmarking Quantum Support Vector Machines (QSVMs) and scripts for generating compatible quantum circuits for hardware execution. Facilitated by NVIDIA's cuQuantum SDK and the cuTensorNet library, this project integrates cutting-edge quantum computing technologies with high-performance computing systems, enhancing quantum machine learning's efficiency and scalability to new heights.
 
 ## Project Overview
-Quantum Support Vector Machines offer a quantum-enhanced approach to solving complex, multidimensional classification problems, outstripping the capabilities of their classical counterparts under certain conditions. Despite their potential, the scalability of QSVMs is hampered by their exponential growth in computational requirements with increasing qubit counts. cuTN-QSVM leverages cuQuantum SDK's cuTensorNet library to mitigate this challenge, effectively reducing the computational complexity from exponential to polynomial time.
+Quantum Support Vector Machines utilize a quantum-enhanced approach to tackle complex, multidimensional classification problems, surpassing the capabilities of classical SVMs under certain conditions. However, the scalability of QSVMs is traditionally limited due to the exponential growth in computational demands with increasing qubit counts. By employing NVIDIA's cuQuantum SDK and the cuTensorNet library, cuTN-QSVM effectively reduces this computational complexity from exponential to quadratic, enabling the simulation of large quantum systems up to 784 qubits on the NVIDIA A100 GPU within seconds.
 
 Technical Highlights:
 
-- Efficient Quantum Simulations: Utilizing the cuTensorNet library, cuTN-QSVM drastically reduces the computational overhead of QSVMs, enabling the execution of quantum simulations for systems up to 784 qubits on the NVIDIA A100 GPU within mere seconds.
-- Multi-GPU Processing: The implementation supports Multi-GPU processing via the Message Passing Interface (MPI), documenting significant reductions in computation times and demonstrating scalable performance improvements across increasing data sizes.
-- Empirical Validation: In empirical assessments, cuTN-QSVM consistently achieves high classification accuracy, reaching up to 95% on the MNIST dataset for training sets exceeding 100 instances, thereby significantly surpassing the performance of traditional SVMs.
+- Efficient Quantum Simulations:  The cuTensorNet library significantly lowers the computational overhead for QSVMs, facilitating rapid and efficient quantum simulations that can handle extensive qubit counts.
+- Multi-GPU Processing: Supported by the Message Passing Interface (MPI), our implementation allows significant reductions in computation times and scalable performance improvements across varying data sizes.
+- Empirical Validation: Through rigorous testing, cuTN-QSVM achieves high classification accuracy, with results reaching up to 95% on the MNIST dataset for training sets larger than 100 instances, markedly outperforming traditional SVMs.
 
+<div style="text-align:center">
+    <img src="figures/speedup_cutensornet.png" alt="Multi-GPU-Result" width="75%" height="auto">
+</div>
 
 <a name="quickstart"></a>
 

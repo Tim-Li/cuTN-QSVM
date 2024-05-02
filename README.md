@@ -35,15 +35,6 @@ pip install scikit-learn
 pip install opt-einsum
 ```
 
-### Dataset
-- mnist
-The MNIST dataset is a classic dataset widely used in the field of machine learning and computer vision. It contains 70,000 handwritten digit images, divided into a training set of 60,000 images and a test set of 10,000 images. Each image is a 28x28 pixel grayscale representation of digits ranging from 0 to 9. This dataset is frequently used as a benchmark for testing image processing systems and machine learning algorithms, particularly in tasks involving pattern recognition, classification, and digit recognition. The simplicity and well-defined nature of MNIST have made it one of the most utilized datasets in the academic community for demonstrating the effectiveness of new machine learning techniques.
-
-- fashion-mnist
-The Fashion-MNIST dataset is a modern alternative to the classic MNIST dataset, typically used for benchmarking machine learning algorithms. It consists of 70,000 grayscale images, each 28x28 pixels, divided into a training set of 60,000 images and a test set of 10,000 images. The dataset features 10 categories of fashion items such as T-shirts/tops, trousers, pullovers, dresses, coats, sandals, shirts, sneakers, bags, and ankle boots. Designed to reflect real-world scenarios, Fashion-MNIST serves as a more challenging and representative dataset than its digit-based predecessor, making it a popular choice for developing and testing machine learning models that deal with image classification tasks.
-
-
-
 ### Simulation method
 - **cuTensorNet** 
 

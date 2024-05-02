@@ -38,23 +38,17 @@ pip install opt-einsum
 ### Simulation method
 - **cuTensorNet** 
 
----
-### Check
-- Target：acc cutensornet simulation for QSVM
-1. compare `qiskit machine learning` and `cutensornet simulation` on same datasets
-2. compare QSVM simulation with `opt-einsum`, `opt-einsum-gpu` and `cutensornet`
-3. banchmark `cutensornet` (single-gpu and multi-gpu) on A100
-4. datasets
-5. opt `cutensornet parameters` and `quantum circuit topology`
-6. **create acc toolchain**
----
-- check accuracy using cuTensorNetwork
-    1. [check qiskit-qsvm code：add new feature](https://qiskit-community.github.io/qiskit-machine-learning/tutorials/03_quantum_kernel.html)
-    2. select small scale datasets to check accuracy compare `our code[cuTensorNetwork]` and `qiskit-qsvm[cuStateVec]`
-    3. [add opt_einsum code](https://optimized-einsum.readthedocs.io/en/stable/)
-- check acc toolchain**
-    1. [check how to create qsvm qc](https://qiskit-community.github.io/qiskit-machine-learning/apidocs/qiskit_machine_learning.kernels.html#module-qiskit_machine_learning.kernels)
-    2. [check how cuquantum.CircuitToEinsum work](https://docs.nvidia.com/cuda/cuquantum/latest/python/api/generated/cuquantum.CircuitToEinsum.html)
-    3. [Running with Threadpool and DASK](https://qiskit.org/ecosystem/aer/howtos/parallel.html)
-    4. [Dask-MPI with GPUs](https://mpi.dask.org/en/latest/gpu.html)
----
+## How to cite
+
+If you used this package or framework for your research, please cite:
+
+```text
+@misc{2024cuTensorNetQSVM,
+      title={cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine with cuQuantum SDK}, 
+      author={...........},
+      year={2024},
+      eprint={2404.13971},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph}
+}
+```

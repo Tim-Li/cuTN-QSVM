@@ -1,13 +1,23 @@
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
 ## cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine
+Welcome to the official repository of cuTN-QSVM, an advanced implementation of Quantum Support Vector Machines (QSVMs) facilitated by NVIDIA's cuQuantum SDK through the cuTensorNet library. This project epitomizes the integration of quantum computing technologies with state-of-the-art high-performance computing systems to elevate quantum machine learning to unprecedented levels of efficiency and scalability.
 
-### Todo
-1. build up qsvm simulation code by cuTensorNet
-2. compare classification result with qiskit QSVC API
-3. Multiprocessing for qiskit-to-TN transformation
-4. Quantum Circuit with topology same as Google's and IBM's QC
-5. CPU benchmark (compared with Numpy opt_einsum.contract)
+## Project Overview
+Quantum Support Vector Machines offer a quantum-enhanced approach to solving complex, multidimensional classification problems, outstripping the capabilities of their classical counterparts under certain conditions. Despite their potential, the scalability of QSVMs is hampered by their exponential growth in computational requirements with increasing qubit counts. cuTN-QSVM leverages cuQuantum SDK's cuTensorNet library to mitigate this challenge, effectively reducing the computational complexity from exponential to polynomial time.
 
-### Install
+Technical Highlights:
+
+- Efficient Quantum Simulations: Utilizing the cuTensorNet library, cuTN-QSVM drastically reduces the computational overhead of QSVMs, enabling the execution of quantum simulations for systems up to 784 qubits on the NVIDIA A100 GPU within mere seconds.
+- Multi-GPU Processing: The implementation supports Multi-GPU processing via the Message Passing Interface (MPI), documenting significant reductions in computation times and demonstrating scalable performance improvements across increasing data sizes.
+- Empirical Validation: In empirical assessments, cuTN-QSVM consistently achieves high classification accuracy, reaching up to 95% on the MNIST dataset for training sets exceeding 100 instances, thereby significantly surpassing the performance of traditional SVMs.
+
+
+<a name="quickstart"></a>
+
+## Quick Start 
+
+### Installation
 ```
 pip install qiskit[visualization]==0.44.2
 pip install qiskit-machine-learning==0.6.1

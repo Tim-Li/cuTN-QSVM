@@ -1,4 +1,4 @@
-## QSVM-Acc-Tools：Quantum Support Vector Machine Simulation using cuTensorNetork
+## cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine with cuQuantum SDK
 
 ### Todo
 1. build up qsvm simulation code by cuTensorNet

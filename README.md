@@ -2,6 +2,11 @@
 
 
 ## cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine with cuQuantum SDK
+
+<img align="right" width="200"
+src="https://developer.nvidia.com/sites/default/files/akamai/nvidia-cuquantum-icon.svg"
+/>
+
 Welcome to the official repository of cuTN-QSVM, featuring fast GPU simulators for benchmarking Quantum Support Vector Machines (QSVMs) and scripts for generating compatible quantum circuits for hardware execution. Facilitated by NVIDIA's cuQuantum SDK and the cuTensorNet library, this project integrates cutting-edge quantum computing technologies with high-performance computing systems, enhancing quantum machine learning's efficiency and scalability to new heights.
 
 ## Project Overview

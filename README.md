@@ -3,7 +3,7 @@
 
 ## cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine with cuQuantum SDK
 
-<img align="right" width="200"
+<img align="right" width="150"
 src="https://developer.nvidia.com/sites/default/files/akamai/nvidia-cuquantum-icon.svg"
 />
 

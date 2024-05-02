@@ -26,14 +26,10 @@ Technical Highlights:
 
 ## Quick Start 
 
-### Quick Environment Check
-The env_check.py script is crafted to swiftly verify that your computational environment is optimally configured to execute simulations with cuTN-QSVM, leveraging the capabilities of cuQuantum and Qiskit. This Python script generates a random quantum circuit using Qiskit, then converts it to Einstein summation format utilizing cuQuantum's CircuitToEinsum with the CuPy backend. This process allows you to assess the integration and performance of these essential tools on your system. To run this script and ensure all necessary libraries are correctly interacting and prepared for more complex operations, execute the following command in your terminal:
-
-```
-python env_check.py
-```
 
 ### Installation
+Ensure you have Python 3.9 or higher and pip 23 or higher installed; it is recommended to upgrade pip using `pip install --upgrade pip` before installation.
+
 ```
 pip install qiskit[visualization]==0.44.2
 pip install qiskit-machine-learning==0.6.1
@@ -42,6 +38,13 @@ pip install pandas
 pip install matplotlib
 pip install scikit-learn
 pip install opt-einsum
+```
+
+### Quick Environment Check
+The env_check.py script is crafted to swiftly verify that your computational environment is optimally configured to execute simulations with cuTN-QSVM, leveraging the capabilities of cuQuantum and Qiskit. This Python script generates a random quantum circuit using Qiskit, then converts it to Einstein summation format utilizing cuQuantum's CircuitToEinsum with the CuPy backend. This process allows you to assess the integration and performance of these essential tools on your system. To run this script and ensure all necessary libraries are correctly interacting and prepared for more complex operations, execute the following command in your terminal:
+
+```
+python env_check.py
 ```
 
 ## Methodology

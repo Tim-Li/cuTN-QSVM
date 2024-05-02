@@ -42,21 +42,21 @@ pip install opt-einsum
 NVIDIA's cuQuantum SDK includes cuTensorNet, a key component designed to optimize quantum circuit simulations on NVIDIA GPUs. It reduces computational costs and memory usage by streamlining tensor contractions and simplifying network complexities through its modular APIs. This enhancement enables efficient, large-scale simulations across multi-GPU and multi-node environments, advancing research in quantum physics, chemistry, and machine learning.
 
 <div style="text-align:center">
-    <img src="figures/cutensornet_module.png" alt="cuTensorNet Module" width="50%" height="auto">
+    <img src="figures/cutensornet_module.png" alt="cuTensorNet Module" width="75%" height="auto">
 </div>
 
 ### Workflow
 In our enhanced QSVM simulation workflow using NVIDIA's cuQuantum SDK, the cuTensorNet module plays a pivotal role. This integration allows for the efficient transformation of quantum circuits into tensor networks, significantly reducing computational complexity from exponential to quadratic with respect to the number of qubits. By leveraging cuTensorNet’s advanced strategies like path reuse and non-blocking multi-GPU operations, we achieve substantial improvements in simulation speed and efficiency, enabling practical, large-scale quantum simulations up to 784 qubits.
 
 <div style="text-align:center">
-    <img src="figures/process_flow_comparison.png" alt="Process Flow" width="60%" height="auto">
+    <img src="figures/process_flow_comparison.png" alt="Process Flow" width="75%" height="auto">
 </div>
 
 ### Multi-GPU Enable
 In our study on distributed simulation within high-performance computing, we expanded QSVM model simulations using a multi-GPU setup to handle a dataset of over 1,000 MNIST images (28x28 pixels, 756 features). Leveraging NVIDIA’s cuStateVector with high-speed NVLink and MPI communication, we achieved significant computational efficiencies and demonstrated a linear speedup in quantum circuit simulations across multiple GPUs.
 
 <div style="text-align:center">
-    <img src="figures/multi_GPU_linearity.png" alt="Multi-GPU-Result" width="50%" height="auto">
+    <img src="figures/multi_GPU_linearity.png" alt="Multi-GPU-Result" width="75%" height="auto">
 </div>
 
 ## How to cite

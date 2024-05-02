@@ -36,12 +36,14 @@ pip install scikit-learn
 pip install opt-einsum
 ```
 
-### Simulation method
-- **cuTensorNet**
+## Methodology
+### cuTensorNet
 
 NVIDIA's cuQuantum SDK includes cuTensorNet, a key component designed to optimize quantum circuit simulations on NVIDIA GPUs. It reduces computational costs and memory usage by streamlining tensor contractions and simplifying network complexities through its modular APIs. This enhancement enables efficient, large-scale simulations across multi-GPU and multi-node environments, advancing research in quantum physics, chemistry, and machine learning.
 
-<img src="figures/cutensornet_module.png" alt="cuTensorNet Module" width="50%" height="auto">
+<div style="text-align:center">
+    <img src="figures/cutensornet_module.png" alt="cuTensorNet Module" width="50%" height="auto">
+</div>
 
 
 ## How to cite

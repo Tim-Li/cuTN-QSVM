@@ -66,7 +66,7 @@ In our enhanced QSVM simulation workflow using NVIDIA's cuQuantum SDK, the cuTen
 </div>
 
 ### Multi-GPU Enable
-In our study on distributed simulation within high-performance computing, we expanded QSVM model simulations using a multi-GPU setup to handle a dataset of over 1,000 MNIST images (28x28 pixels, 756 features). Leveraging NVIDIA’s cuStateVector with high-speed NVLink and MPI communication, we achieved significant computational efficiencies and demonstrated a linear speedup in quantum circuit simulations across multiple GPUs.
+In our study on distributed simulation within high-performance computing, we expanded QSVM model simulations using a multi-GPU setup to handle a dataset of over 1,000 MNIST images (28x28 pixels, 756 features). Leveraging NVIDIA’s cuStateVector with high-speed [NVLink](https://www.nvidia.com/en-gb/design-visualization/nvlink-bridges/) and [MPI](https://developer.nvidia.com/mpi-solutions-gpus) communication, we achieved significant computational efficiencies and demonstrated a linear speedup in quantum circuit simulations across multiple GPUs in [NVIDIA DGX Platform](https://www.nvidia.com/en-gb/data-center/dgx-platform/).
 
 <div style="text-align:center">
     <img src="figures/multi_GPU_linearity.png" alt="Multi-GPU-Result" width="75%" height="auto">

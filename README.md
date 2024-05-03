@@ -50,7 +50,7 @@ python env_check.py
 ```
 
 ## Methodology
-### cuTensorNet
+### [cuTensorNet](https://docs.nvidia.com/cuda/cuquantum/latest/cutensornet/overview.html)
 
 NVIDIA's [cuQuantum SDK](https://github.com/NVIDIA/cuda-quantum/tree/main) includes cuTensorNet, a key component designed to optimize quantum circuit simulations on NVIDIA GPUs. It reduces computational costs and memory usage by streamlining tensor contractions and simplifying network complexities through its modular APIs. This enhancement enables efficient, large-scale simulations across multi-GPU and multi-node environments, advancing research in quantum physics, chemistry, and machine learning.
 
@@ -58,7 +58,7 @@ NVIDIA's [cuQuantum SDK](https://github.com/NVIDIA/cuda-quantum/tree/main) inclu
     <img src="figures/cutensornet_module.png" alt="cuTensorNet Module" width="75%" height="auto">
 </div>
 
-### Workflow
+### Simulation Workflow
 In our enhanced QSVM simulation workflow using NVIDIA's cuQuantum SDK, the cuTensorNet module plays a pivotal role. This integration allows for the efficient transformation of quantum circuits into tensor networks, significantly reducing computational complexity from exponential to quadratic with respect to the number of qubits. By leveraging cuTensorNet’s advanced strategies like path reuse and non-blocking multi-GPU operations, we achieve substantial improvements in simulation speed and efficiency, enabling practical, large-scale quantum simulations up to 784 qubits.
 
 <div style="text-align:center">

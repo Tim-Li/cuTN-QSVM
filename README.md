@@ -30,16 +30,23 @@ Technical Highlights:
 
 
 ### Installation
-Ensure you have Python 3.9 or higher and pip 23 or higher installed; it is recommended to upgrade pip using `pip install --upgrade pip` before installation.
+Ensure you have Python 3.10 or higher and pip 23 or higher installed; it is recommended to upgrade pip using `pip install --upgrade pip` before installation.
 
 ```
 pip install qiskit[visualization]==0.44.2
 pip install qiskit-machine-learning==0.6.1
 pip install -v --no-cache-dir cuquantum cuquantum-python
-pip install pandas
-pip install matplotlib
-pip install scikit-learn
 pip install opt-einsum
+```
+You can also use [NVIDIA cuQuantum Appliance 23.10](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuquantum-appliance)
+
+```
+# pull the image
+docker pull nvcr.io/nvidia/cuquantum-appliance:23.10
+
+# launch the container interactively
+docker run --gpus all -it --rm nvcr.io/nvidia/cuquantum-appliance:23.10
+pip install qiskit-machine-learning==0.6.1
 ```
 
 ### Quick Environment Check

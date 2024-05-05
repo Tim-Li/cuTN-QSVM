@@ -61,15 +61,15 @@ You can check with [cuTN-QSVM demo code](qsvm_simulation_demo.ipynb) to kenow th
 
 ### cuTN-QSVM with single GPU
 ```
-python banchmark_qsvm_tnsm.py
+python benchmark/banchmark_qsvm_tnsm.py
 ```
 
 ### cuTN-QSVM with multi GPU
 ```
-mpirun -np 8 python banchmark_qsvm_tnsm-mpi.py 
-mpirun -np 4 python banchmark_qsvm_tnsm-mpi.py 
-mpirun -np 2 python banchmark_qsvm_tnsm-mpi.py 
-mpirun -np 1 python banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 8 python benchmark/banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 4 python benchmark/banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 2 python benchmark/banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 1 python benchmark/banchmark_qsvm_tnsm-mpi.py 
 ```
 
 ## Methodology

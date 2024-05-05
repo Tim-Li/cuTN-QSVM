@@ -20,11 +20,12 @@ import time
 import cupy as cp
 from cupy.cuda.runtime import getDeviceCount
 from mpi4py import MPI
+import opt_einsum as oe
 
 root = 0
 comm = MPI.COMM_WORLD
 rank, size = comm.Get_rank(), comm.Get_size()
-device_id = 7
+device_id = 6
 cp.cuda.Device(device_id).use()
 print(device_id)
 
@@ -64,39 +65,35 @@ def make_bsp(n_dim):
     for q in range(n_dim):
         bsp_qc.rz(param.params[q],[q])
     return bsp_qc
-def all_circuits_parallel(y_t, x_t, indices_list, n_dim, kernel, num_cpu):
-    with Pool(processes=num_cpu, maxtasksperchild=100) as pool:
-        circuits = pool.starmap(kernel.construct_circuit, [(y_t[i1-1], x_t[i2-1],False) for i1, i2 in indices_list])
-    return circuits
-def get_exp(x_t, n_dim, kernel):
-    circuit = kernel.construct_circuit(x_t[0],x_t[0],measurement=False)
-    converter = CircuitToEinsum(circuit, dtype='complex64', backend='numpy')
-    a = str(0).zfill(n_dim)
-    exp, oper = converter.amplitude(a)  
-    return exp
-def get_operand(circuit,n_dim):
-    a = str(0).zfill(n_dim)
-    converter = CircuitToEinsum(circuit, dtype='complex64', backend='numpy')
-    oper = converter.amplitude_simple(a)  
-    return oper    
-def all_operands_parallel(circuit, n_dim, num_cpu):
-    OPER = []
-    with Pool(processes=num_cpu, maxtasksperchild=100) as pool:
-        indices_list = list(range(len(circuit)))
-        operands = pool.starmap(get_operand, [(circuit[i],n_dim) for i in indices_list])
-    for operand in operands:
-        oper = [cp.asarray(tensor) for tensor in operand]
-        OPER.append(oper)
-    return OPER
-def kernel_matrix_tnsm(y_t, x_t, opers, indices_list, network, mode=None):
+def new_op(n_dim,oper,y_t,x_t):
+    n_zg, n_zy_g = [], []
+    for d1 in y_t:
+        z_g  = np.array([[np.exp(-1j*0.5*d1),0],[0,np.exp(1j*0.5*d1)]])
+        n_zg.append(z_g)
+        y_g  = np.array([[np.cos(d1/2),-np.sin(d1/2)],[np.sin(d1/2),np.cos(d1/2)]])
+        n_zy_g.append(z_g)
+        n_zy_g.append(y_g)
+    oper[n_dim*2:n_dim*4] = cp.array(n_zy_g)
+    oper[n_dim*5-1:n_dim*6-1] = cp.array(n_zg)
+    n_zgd, n_zy_gd = [], []
+    for d2 in x_t[::-1]:       
+        z_gd  = np.array([[np.exp(1j*0.5*d2),0],[0,np.exp(-1j*0.5*d2)]])
+        n_zgd.append(z_gd)  
+        y_gd  = np.array([[np.cos(d2/2),np.sin(d2/2)],[-np.sin(d2/2),np.cos(d2/2)]])
+        n_zy_gd.append(y_gd)
+        n_zy_gd.append(z_gd)
+    oper[n_dim*6-1:n_dim*7-1] = cp.array(n_zgd)
+    oper[n_dim*8-2:n_dim*10-2] = cp.array(n_zy_gd)
+    return oper
+
+def kernel_matrix_tnsm(y_t, x_t, opers, indices_list, exp, opt_path, mode=None):
     kernel_matrix = np.zeros((len(y_t),len(x_t)))
     i = -1
-    with network as tn:
-        for i1, i2 in indices_list:
-            i += 1
-            tn.reset_operands(*opers[i])     
-            amp_tn = abs(tn.contract()) ** 2
-            kernel_matrix[i1-1][i2-1] = np.round(amp_tn,8) 
+    for i1, i2 in indices_list:
+        i += 1 
+        result = oe.contract(exp, *opers[i], optimize=opt_path)
+        amp_tn = abs(result) ** 2
+        kernel_matrix[i1-1][i2-1] = np.round(amp_tn,8) 
     if mode == 'train':
         kernel_matrix = kernel_matrix + kernel_matrix.T+np.diag(np.ones((len(x_t))))
     return kernel_matrix
@@ -106,32 +103,37 @@ def run_tnsm(n_dim, nb1, nb2):
     bsp_qc = make_bsp(n_dim)
     bsp_kernel_tnsm = QuantumKernel(feature_map=bsp_qc)
     indices_list_t = list(combinations(range(1, len(data_train) + 1), 2))
+
     t0 = time.time()      
-    circuit_train = all_circuits_parallel(data_train, data_train, indices_list_t, n_dim, bsp_kernel_tnsm, 10)
-    circuit_t = round((time.time()-t0),3)
-    t0 = time.time()        
-    exp = get_exp(data_train, n_dim, bsp_kernel_tnsm)
+    circuit = bsp_kernel_tnsm.construct_circuit(data_train[0], data_train[0],False)
+    converter = CircuitToEinsum(circuit, dtype='complex128', backend='cupy')
+    a = str(0).zfill(n_dim)
+    exp, oper = converter.amplitude(a)     
     exp_t = round((time.time()-t0),3)
+    
     t0 = time.time() 
-    oper_train = all_operands_parallel(circuit_train, n_dim, 10)
+    oper_train = []
+    for i1, i2 in indices_list_t:
+        n_op = new_op(n_dim,oper,data_train[i1-1],data_train[i2-1])
+        oper_train.append(n_op)        
     oper_t = round((time.time()-t0),3)
+
     t0 = time.time()     
     oper = oper_train[0]
-    options = NetworkOptions(blocking="auto",device_id=device_id)
-    network = Network(exp, *oper,options=options)
-    path, info = network.contract_path()
-    # network.autotune(iterations=20)
+    path, path_info = oe.contract_path(exp, *oper)
     path_t = round((time.time()-t0),3)
     t0 = time.time()     
-    tnsm_kernel_matrix_train = kernel_matrix_tnsm(data_train, data_train, oper_train, indices_list_t, network, mode='train')
+    tnsm_kernel_matrix_train = kernel_matrix_tnsm(data_train, data_train, oper_train, indices_list_t, exp, path, mode='train')
     tnsm_kernel_t = round((time.time()-t0),3)
-    print(n_dim,circuit_t,exp_t,oper_t,path_t,tnsm_kernel_t,len(circuit_train))
+    print(n_dim,exp_t,oper_t,path_t,tnsm_kernel_t,len(oper_train))
 
 run_tnsm(2,2,1)
-run_tnsm(128,500,1)
-# for q in range(2,34):
-#     run_tnsm(q,2,1)
-# for q in range(42,200,10):
-#     run_tnsm(q,2,1)
-# for q in [200,300,400,500,600,784]:
-#     run_tnsm(q,2,1)
+# for d in [2,5,10,50,100,500,1000]:
+#     run_tnsm(128,d,1)
+# run_tnsm(300,2,1)
+for q in range(2,34):
+    run_tnsm(q,2,1)
+for q in range(42,200,10):
+    run_tnsm(q,2,1)
+for q in [200,300,400,500,600,784]:
+    run_tnsm(q,2,1)

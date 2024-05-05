@@ -55,6 +55,22 @@ The env_check.py script is crafted to swiftly verify that your computational env
 ```
 python env_check.py
 ```
+### cuTN-QSVM demo code
+You can check with [cuTN-QSVM demo code](qsvm_simulation_demo.ipynb) to kenow the detail of QSVM simulation with statevetor and tensornetwork.
+
+
+### cuTN-QSVM with single GPU
+```
+python banchmark_qsvm_tnsm.py
+```
+
+### cuTN-QSVM with multi GPU
+```
+mpirun -np 8 python banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 4 python banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 2 python banchmark_qsvm_tnsm-mpi.py 
+mpirun -np 1 python banchmark_qsvm_tnsm-mpi.py 
+```
 
 ## Methodology
 ### [cuTensorNet](https://docs.nvidia.com/cuda/cuquantum/latest/cutensornet/overview.html)

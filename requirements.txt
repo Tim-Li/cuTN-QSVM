@@ -1,4 +1,4 @@
 numpy==1.26.4
 scikit-learn==1.4.2
-install qiskit[visualization]==0.44.2
+qiskit[visualization]==0.44.2
 qiskit-machine-learning==0.6.1

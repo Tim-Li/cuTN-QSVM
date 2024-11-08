@@ -12,7 +12,6 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.datasets import load_digits, fetch_openml
 from sklearn.model_selection import GridSearchCV
 from qiskit.circuit.library import PauliFeatureMap, ZFeatureMap, ZZFeatureMap
-from qiskit_machine_learning.kernels import QuantumKernel
 from qiskit import QuantumCircuit, transpile, Aer
 from qiskit.circuit import ParameterVector
 from cuquantum import *
@@ -64,7 +63,15 @@ def make_bsp(n_dim):
     for q in range(n_dim):
         bsp_qc.rz(param.params[q],[q])
     return bsp_qc
-def new_op(n_dim,oper,y_t,x_t):
+def build_qsvm_qc(bsp_qc,n_dim,y_t,x_t):
+    qc_1 = bsp_qc.assign_parameters(y_t).to_gate()
+    qc_2 = bsp_qc.assign_parameters(x_t).inverse().to_gate()
+    kernel_qc = QuantumCircuit(n_dim)
+    kernel_qc.append(qc_1,list(range(n_dim)))
+    kernel_qc.append(qc_2,list(range(n_dim)))
+    return kernel_qc
+def renew_operand(n_dim,oper_tmp,y_t,x_t):
+    oper = oper_tmp.copy()
     n_zg, n_zy_g = [], []
     for d1 in y_t:
         z_g  = np.array([[np.exp(-1j*0.5*d1),0],[0,np.exp(1j*0.5*d1)]])
@@ -84,6 +91,12 @@ def new_op(n_dim,oper,y_t,x_t):
     oper[n_dim*6-1:n_dim*7-1] = cp.array(n_zgd)
     oper[n_dim*8-2:n_dim*10-2] = cp.array(n_zy_gd)
     return oper
+def data_to_operand(n_dim,operand_tmp,data1,data2,indices_list):
+    operand_list = []
+    for i1, i2 in indices_list:
+        n_op = renew_operand(n_dim,operand_tmp,data1[i1-1],data2[i2-1])
+        operand_list.append(n_op) 
+    return operand_list
 
 def kernel_matrix_tnsm(y_t, x_t, opers, indices_list, network, mode=None):
     kernel_matrix = np.zeros((len(y_t),len(x_t)))
@@ -101,21 +114,17 @@ def kernel_matrix_tnsm(y_t, x_t, opers, indices_list, network, mode=None):
 def run_tnsm(n_dim, nb1, nb2):
     data_train, data_val  = data_prepare(n_dim, X_train, X_val, nb1, nb2)
     bsp_qc = make_bsp(n_dim)
-    bsp_kernel_tnsm = QuantumKernel(feature_map=bsp_qc)
     indices_list_t = list(combinations(range(1, len(data_train) + 1), 2))
 
     t0 = time.time()      
-    circuit = bsp_kernel_tnsm.construct_circuit(data_train[0], data_train[0],False)
+    circuit = build_qsvm_qc(bsp_qc,n_dim, data_train[0], data_train[0])
     converter = CircuitToEinsum(circuit, dtype='complex128', backend='cupy')
     a = str(0).zfill(n_dim)
     exp, oper = converter.amplitude(a)     
     exp_t = round((time.time()-t0),3)
     
     t0 = time.time() 
-    oper_train = []
-    for i1, i2 in indices_list_t:
-        n_op = new_op(n_dim,oper,data_train[i1-1],data_train[i2-1])
-        oper_train.append(n_op)        
+    oper_train = data_to_operand(n_dim,oper,data_train,data_train,indices_list_t)   
     oper_t = round((time.time()-t0),3)
 
     t0 = time.time()     
@@ -125,6 +134,7 @@ def run_tnsm(n_dim, nb1, nb2):
     path, info = network.contract_path()
     network.autotune(iterations=20)
     path_t = round((time.time()-t0),3)
+
     t0 = time.time()     
     tnsm_kernel_matrix_train = kernel_matrix_tnsm(data_train, data_train, oper_train, indices_list_t, network, mode='train')
     tnsm_kernel_t = round((time.time()-t0),3)

@@ -1,0 +1,4 @@
+scikit-learn
+qiskit[visualization]==1.2.4
+cuquantum==24.08.0.2 
+cuquantum-python==24.08.0.2 

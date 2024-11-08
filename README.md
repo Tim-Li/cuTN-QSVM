@@ -33,9 +33,10 @@ Technical Highlights:
 Ensure you have Python 3.10 or higher and pip 23 or higher installed; it is recommended to upgrade pip using `pip install --upgrade pip` before installation.
 
 ```
-pip install qiskit[visualization]==0.44.2
+pip install qiskit[visualization]==0.44.3
+pip install qiskit-aer-gpu==0.12.2
 pip install qiskit-machine-learning==0.6.1
-pip install -v --no-cache-dir cuquantum cuquantum-python
+pip install -v --no-cache-dir cuquantum==23.10.0 cuquantum-python==23.10.0
 pip install opt-einsum
 ```
 You can also use [NVIDIA cuQuantum Appliance 23.10](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuquantum-appliance)
@@ -56,7 +57,7 @@ The env_check.py script is crafted to swiftly verify that your computational env
 python env_check.py
 ```
 ### cuTN-QSVM demo code
-You can check with [cuTN-QSVM demo code](qsvm_simulation_demo.ipynb) to kenow the detail of QSVM simulation with statevetor and tensornetwork.
+You can check with [cuTN-QSVM demo code](qsvm_simulation_demo.ipynb) to kenow the detail of QSVM simulation with statevetor and tensornetwork. If you're using NVIDIA cuQuantum Appliance 23.10, you can check out the [cuTN-QSVM demo code with cusvaer](qsvm_simulation_demo_cusvaer.ipynb).
 
 
 ### cuTN-QSVM with single GPU

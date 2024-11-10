@@ -1,5 +1,2 @@
-Data/fashion-mnist-data/fashion-mnist_test.csv
-Data/fashion-mnist-data/fashion-mnist_train.csv
-tmp_code
-new_QSVM
-benchmark_exp
+env
+tutorial

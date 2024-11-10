@@ -30,16 +30,16 @@ Technical Highlights:
 
 
 ### Installation
-Ensure you have Python 3.10 or higher and pip 23 or higher installed; it is recommended to upgrade pip using `pip install --upgrade pip` before installation.
-
 ```
-pip install qiskit[visualization]==0.44.3
-pip install qiskit-aer-gpu==0.12.2
-pip install qiskit-machine-learning==0.6.1
-pip install -v --no-cache-dir cuquantum==23.10.0 cuquantum-python==23.10.0
-pip install opt-einsum
+conda create -n cutn-qsvm python=3.10 -y
+conda activate cutn-qsvm
 ```
-You can also use [NVIDIA cuQuantum Appliance 23.10](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuquantum-appliance)
+```
+git clone https://github.com/Tim-Li/cuTN-QSVM.git
+cd cuTN-QSVM
+pip install -r requirements.txt 
+```
+You can also use [NVIDIA cuQuantum Appliance >= 23.10](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuquantum-appliance)
 
 ```
 # pull the image
@@ -47,7 +47,6 @@ docker pull nvcr.io/nvidia/cuquantum-appliance:23.10
 
 # launch the container interactively
 docker run --gpus all -it --rm nvcr.io/nvidia/cuquantum-appliance:23.10
-pip install qiskit-machine-learning==0.6.1
 ```
 
 ### Quick Environment Check
@@ -57,7 +56,7 @@ The env_check.py script is crafted to swiftly verify that your computational env
 python env_check.py
 ```
 ### cuTN-QSVM demo code
-You can check with [cuTN-QSVM demo code](qsvm_simulation_demo.ipynb) to kenow the detail of QSVM simulation with statevetor and tensornetwork. If you're using NVIDIA cuQuantum Appliance 23.10, you can check out the [cuTN-QSVM demo code with cusvaer](qsvm_simulation_demo_cusvaer.ipynb).
+You can check with [cuTN-QSVM demo code](qsvm_simulation_demo.ipynb) to kenow the detail of QSVM simulation with tensornetwork.
 
 
 ### cuTN-QSVM with single GPU

@@ -7,7 +7,6 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.datasets import load_digits, fetch_openml
 from qiskit.circuit.library import PauliFeatureMap, ZFeatureMap, ZZFeatureMap
-from qiskit_machine_learning.kernels import QuantumKernel
 from qiskit import QuantumCircuit
 from qiskit.circuit import ParameterVector
 from cuquantum import *
@@ -32,12 +31,12 @@ Y = mnist.target.to_numpy().astype(int)
 class_list = [7,9]
 c01 = np.where((Y == class_list[0])|(Y == class_list[1]))
 X,Y = X[c01],Y[c01]
-MAX=1000
+MAX=1600
 data_train, label_train = X[:MAX],Y[:MAX]
 X_train, X_val, Y_train, Y_val = train_test_split(data_train, label_train, test_size = 0.2, random_state=255)
 
 if rank == root:
-    print(f'qubits, data, exp_t, operand_t, path_t, contact_t')
+    print(f' qubits, [num train data, num list, num parti-list, num gpu], [exp_t, operand_t, path_t, contact_t, total_t]')
 
 def data_prepare(n_dim, sample_train, sample_test, nb1, nb2):
     std_scale = StandardScaler().fit(sample_train)
@@ -166,11 +165,17 @@ def run_tnsm(data_train, n_dim):
     tnsm_kernel_t = round((time.time()-t0),3)
 
     if rank == root:
-        print(f'{n_dim}, {len(data_train)}, {exp_t}, {oper_t}, {path_t}, {tnsm_kernel_t}, {len(list_train_partition)}, {len(list_train)}')
+        print(f' {n_dim}, {len(data_train)}, {len(list_train)}, {len(list_train_partition)}, {len(amp_data_train)},  {exp_t}, {oper_t}, {path_t}, {tnsm_kernel_t}, {round((exp_t+oper_t+path_t+tnsm_kernel_t),3)}')
 
-dd = np.zeros((10,2))
+dd = np.zeros((20,2))
 run_tnsm(dd, 2)
-for ndim in [2, 4, 8, 16, 32, 64, 128]:
-    for d in [20, 40, 60, 80, 100, 200, 400, 600, 800, 1000]:
-        dtrain, _ = data_prepare(ndim, X_train, X_val, d, 1)
-        run_tnsm(dtrain, ndim)
+## for 1 node 8 gpus 
+for ndim in [2,4,8,16,32,64,128,256,512,784]:
+    for d in [20,40,50,60,80,100,200,400,500,600,800,1000]:
+        dd = np.zeros((d,ndim))
+        run_tnsm(dd, ndim)
+## for 4 node 8 gpus 
+# for ndim in [1024,2048,2352,3072,4096]:
+#     for d in [20,40,50,60,80,100,200,400,500,600,800,1000]:
+#         dd = np.zeros((d,ndim))
+#         run_tnsm(dd, ndim)

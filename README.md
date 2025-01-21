@@ -26,9 +26,11 @@ Technical Highlights:
 
 <a name="quickstart"></a>
 
+## Update
+- **2025.01** Multi-GPU and Multi-ndoe benchmark [\[here\]](benchmark/README.md)
+
+
 ## Quick Start 
-
-
 ### Installation
 ```
 conda create -n cutn-qsvm python=3.10 -y

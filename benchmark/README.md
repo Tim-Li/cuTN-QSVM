@@ -3,7 +3,7 @@
 ```
 mpirun -np 1 python banchmark_qsvm_tnsm-mpi_sgpu.py
 ```
-![alt text](figure/figure1_sgpu.png)
+![alt text](figure/figure_sgpu.png)
 
 ### 2. Multiple Data Pairs with Multiple GPUs
 ```

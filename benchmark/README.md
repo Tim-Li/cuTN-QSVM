@@ -3,10 +3,10 @@
 ```
 mpirun -np 1 python banchmark_qsvm_tnsm-mpi_sgpu.py
 ```
-#### 1. Runtime compare with v100, a100 and h100 GPU 
+#### - Runtime compare with v100, a100 and h100 GPU 
 ![alt text](figure/figure_sgpu.png)
 
-#### 2. Runtime detail with h100 GPU
+#### - Runtime detail with h100 GPU
 ![alt text](figure/figure1_sgpu.png)
 
 ### 2. Multiple Data Pairs with Multiple GPUs
@@ -22,8 +22,8 @@ ml cuq/12
 source /beegfs/_venv/cuq24cu12/bin/activate
 mpirun python banchmark_qsvm_tnsm-mpi_mgpu.py
 ```
-#### 1. mgpu with v100
+#### - mgpu with v100
 ![alt text](figure/figure2_mgpu_v100.png)
 
-#### 2. mgpu with h100
+#### - mgpu with h100
 ![alt text](figure/figure3_mgpu_h100.png)

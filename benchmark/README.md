@@ -3,7 +3,11 @@
 ```
 mpirun -np 1 python banchmark_qsvm_tnsm-mpi_sgpu.py
 ```
+#### 1. Runtime compare with v100, a100 and h100 GPU 
 ![alt text](figure/figure_sgpu.png)
+
+#### 2. Runtime detail with h100 GPU
+![alt text](figure/figure1_sgpu.png)
 
 ### 2. Multiple Data Pairs with Multiple GPUs
 ```

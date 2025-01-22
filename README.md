@@ -28,6 +28,7 @@ Technical Highlights:
 
 ## Update
 - **2025.01** Multi-GPU and Multi-ndoe benchmark [\[here\]](benchmark/README.md)
+- **2025.02** Large-scale QC
 
 
 ## Quick Start 

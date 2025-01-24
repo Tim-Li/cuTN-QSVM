@@ -27,8 +27,9 @@ Technical Highlights:
 <a name="quickstart"></a>
 
 ## Update
-- **2025.01** Multi-GPU and Multi-ndoe benchmark [\[here\]](benchmark/README.md)
-- **2025.02** Large-scale QC
+- **2025.01.22** Multi-GPU and Multi-ndoe benchmark [\[here\]](benchmark/README.md)
+- **2025.01** Large-scale QC
+- **2025.01** Add colab demo
 
 
 ## Quick Start 

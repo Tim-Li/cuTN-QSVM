@@ -104,12 +104,11 @@ In our study on distributed simulation within high-performance computing, we exp
 If you used this package or framework for your research, please cite:
 
 ```text
-@misc{chen2024cutnqsvm,
-      title={cuTN-QSVM: cuTensorNet-accelerated Quantum Support Vector Machine with cuQuantum SDK}, 
-      author={Kuan-Cheng Chen and Tai-Yue Li and Yun-Yuan Wang and Simon See and Chun-Chieh Wang and Robert Willie and Nan-Yow Chen and An-Cheng Yang and Chun-Yu Lin},
-      year={2024},
-      eprint={2405.02630},
-      archivePrefix={arXiv},
-      primaryClass={quant-ph}
+@article{10.1088/2632-2153/adb4ba,
+	author={Chen, Kuan-Cheng and Li, Tai-Yue and Wang, Yun-Yuan and See, Simon and Wang, Chun-Chieh and Wille, Robert and Chen, Nan-Yow and Yang, An-Cheng and Lin, Chun-Yu},
+	title={Validating Large-Scale Quantum Machine Learning: Efficient Simulation of Quantum Support Vector Machines Using Tensor Networks},
+	journal={Machine Learning: Science and Technology},
+	url={http://iopscience.iop.org/article/10.1088/2632-2153/adb4ba},
+	year={2025}
 }
 ```

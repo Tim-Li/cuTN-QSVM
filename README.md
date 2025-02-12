@@ -29,7 +29,7 @@ Technical Highlights:
 ## Update
 - **2025.01.22** Multi-GPU and Multi-ndoe benchmark [\[here\]](benchmark/README.md)
 - **2025.01** Large-scale QC
-- **2025.01** Add colab demo
+- **2025.01** Add colab demo [[here](https://colab.research.google.com/drive/1ksUC3nX8d1I4DE1EqihgAmKurPEbYIhW)]
 
 
 ## Quick Start 
